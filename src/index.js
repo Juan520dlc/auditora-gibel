@@ -14,7 +14,6 @@ import PaginaError from "./Rutas/PaginaError";
 import Contacto from "./Rutas/Contacto";
 import Registro from "./Rutas/Registro";
 import InicioSesion from "./Rutas/InicioSesion";
-
 import "./App.css"
 
 const AppLayout = () => {
