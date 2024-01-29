@@ -18,7 +18,7 @@
         $where = "WHERE id=$id";
     }
 
-    $sql = "SELECT * FROM cuentacobrar";
+    $sql = "SELECT * FROM cuentapagar";
     $resultado = $mysqli->query($sql);
 
 ?>
@@ -34,7 +34,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cuentas por Cobrar</title>
+    <title>Cuentas por Pagar</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -83,13 +83,14 @@
             </div>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link">
+            <li class="nav-item">
+                <a class="nav-link" href="cuentasCobrar.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cuentas por Cobrar</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="cuentasPagar.php">
+
+            <li class="nav-item active">
+                <a class="nav-link">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cuentas por Pagar</span></a>
             </li>
@@ -155,7 +156,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Cuentas por cobrar</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Cuentas por Pagar</h1>
                     <p class="mb-4"></p>
 
                     <!-- DataTales Example -->
@@ -168,23 +169,23 @@
                                             <th>Proveedor</th>
                                             <th>No. Factura</th>
                                             <th>Valor</th>
+                                            <th>Fecha de Recibido</th>
                                             <th>Fecha de Vencimiento</th>
                                             <th>Dias</th>
                                             <th>Tipo de Soporte</th>
                                             <th>Fecha de Pago</th>
-                                            <th>Forma de Pago</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                        <th>Proveedor</th>
+                                            <th>Proveedor</th>
                                             <th>No. Factura</th>
                                             <th>Valor</th>
+                                            <th>Fecha de Recibido</th>
                                             <th>Fecha de Vencimiento</th>
                                             <th>Dias</th>
                                             <th>Tipo de Soporte</th>
                                             <th>Fecha de Pago</th>
-                                            <th>Forma de Pago</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -193,11 +194,11 @@
                                             <td><?php echo $row['proveedor'];?></td>
                                             <td><?php echo $row['numFactura'];?></td>
                                             <td><?php echo $row['valor'];?></td>
+                                            <td><?php echo $row['fechaRecibido'];?></td>
                                             <td><?php echo $row['fechaVencimiento'];?></td>
                                             <td><?php echo $row['dias'];?></td>
                                             <td><?php echo $row['soporteTipo'];?></td>
                                             <td><?php echo $row['fechaPago'];?></td>
-                                            <td><?php echo $row['formaPago'];?></td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
@@ -216,7 +217,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Auditora Gibel 2024</span>
                     </div>
                 </div>
             </footer>

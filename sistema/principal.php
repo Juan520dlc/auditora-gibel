@@ -43,6 +43,10 @@ $resultado = $mysqli->query($sql);
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Sweetalert Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
 
 </head>
 
@@ -82,9 +86,19 @@ $resultado = $mysqli->query($sql);
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cuentas por Cobrar</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cuentasCobrar.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cuentas por Pagar</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -138,9 +152,8 @@ $resultado = $mysqli->query($sql);
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Panel de Control</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-5">
+                        <h1 class="h4 mb-0 align-content-center text-gray-800">Panel de Control</h1>
                     </div>
 
             </div>
@@ -148,8 +161,13 @@ $resultado = $mysqli->query($sql);
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Usuarios Registrados</h1>
-                <p class="mb-4"></p>
+                <h1 class="h5 mb-0 text-gray-800">Usuarios Registrados</h1>
+
+                <div class="d-sm-flex align-items-center justify-content-between mb-5">
+                    <p class="mb-4"></p>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-gradient-info text-gray-100 shadow-sm"><i class="fas fa-regular fa-user fa-sm text-white-100"></i> Agregar Usuario</a>
+                </div>
+                <p class="mb-2"></p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -158,21 +176,33 @@ $resultado = $mysqli->query($sql);
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
                                         <th>Usuario</th>
                                         <th>Tipo Usuario</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
                                         <th>Usuario</th>
                                         <th>Tipo Usuario</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     <?php while ($row = $resultado->fetch_assoc()) { ?>
                                         <tr>
+                                            <td><?php echo $row['id']; ?></td>
+                                            <td><?php echo $row['nombre']; ?></td>
                                             <td><?php echo $row['usuario']; ?></td>
                                             <td><?php echo $row['tipo_usuario']; ?></td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-info"><i class="fas fa-edit"></i> Editar</a>
+                                                <a href="" onclick="return confirm ('¿Está seguro de eliminar?');" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Eliminar</a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -180,6 +210,49 @@ $resultado = $mysqli->query($sql);
                         </div>
                     </div>
                 </div>
+
+                <div class="d-sm-flex align-items-center justify-content-between mb-5">
+                    <p class="mb-4"></p>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary text-gray-100 shadow-sm"><i class="fas fa-download fa-sm text-white-100"></i> Generar Reporte</a>
+                </div>
+                
+                <!-- Formulario para agregar usuarios -->
+                <div class="container p-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?php if(isset($_SESSION['message'])) { ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <?= $_SESSION['message'] ?>
+                                    <button type="button" class="close"data-dismiss="alert"aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php session_unset(); } ?>
+                            <div class="card card-body">
+                                <form action="./includes/agregar_usuario.php" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" name="Nombre" class="form-control" placeholder="Nombre del Usuario">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="Usuario" class="form-control" placeholder="Usuario">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="Contraseña" class="form-control" placeholder="Contraseña">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" name="Tipo de Usuario" class="form-control" placeholder="Tipo de Usuario">
+                                        </div>
+                                        <input type="submit" class="btn btn-success btn-block" name="Registrar nuevo usuario" value="Registrar">
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- End of Main Content -->
 
@@ -239,6 +312,10 @@ $resultado = $mysqli->query($sql);
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <!-- SweetAlert Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/sweetAlert.js"></script>
 
 </body>
 

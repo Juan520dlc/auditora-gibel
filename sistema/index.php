@@ -25,11 +25,11 @@
 
                 header("Location: principal.php");
             } else {
-                echo "La cntraseña no coincide";
+                echo "La contraseña no coincide";
             }
 
         } else {
-            echo "No existe usuario";
+            echo "No existe el usuario";
         }
     }
 
@@ -49,7 +49,6 @@
         <title>Inicio de Sesion</title>
 
         <!-- Custom fonts for this template-->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -96,7 +95,7 @@
                                                     <label class="custom-control-label" for="customCheck">Recuerdame</label>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            <button type="submit" onclick="" class="btn btn-primary btn-user btn-block">
                                                 Iniciar Sesion
                                             </button>
                                             <hr>
@@ -135,6 +134,8 @@
 
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
+
+
 
     </body>
 
